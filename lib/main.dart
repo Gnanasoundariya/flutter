@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Multiple Classes Example',
+      title: 'Flutter List with Icons Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lists of Flutter'),
+        title: Text('Flutter Lists Example'),
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -68,36 +68,66 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class HomeScreen extends StatelessWidget {
+  final List<Map<String, dynamic>> items = List.generate(
+    10,
+        (i) => {'title': 'Item $i', 'icon': Icons.label},
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Home Screen',
-        style: TextStyle(fontSize: 24),
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(items[index]['icon']),
+            title: Text(items[index]['title']),
+          );
+        },
       ),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
+  final List<Map<String, dynamic>> items = List.generate(
+    10,
+        (i) => {'title': 'Setting $i', 'icon': Icons.settings},
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Settings Screen',
-        style: TextStyle(fontSize: 24),
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(items[index]['icon']),
+            title: Text(items[index]['title']),
+          );
+        },
       ),
     );
   }
 }
 
 class ProfileScreen extends StatelessWidget {
+  final List<Map<String, dynamic>> items = List.generate(
+    10,
+        (i) => {'title': 'Profile $i', 'icon': Icons.person},
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Profile Screen',
-        style: TextStyle(fontSize: 24),
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(items[index]['icon']),
+            title: Text(items[index]['title']),
+          );
+        },
       ),
     );
   }
