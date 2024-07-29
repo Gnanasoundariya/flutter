@@ -28,7 +28,8 @@ class _MainScreenState extends State<MainScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     SettingsScreen(),
-    ProfileScreen(),
+    // ProfileScreen(),
+    CounterScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -50,13 +51,18 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person),
+          //   label: 'Profile',
+          // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.add),
+            label: 'Counter',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -111,24 +117,82 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> items = List.generate(
-    10,
-        (i) => {'title': 'Profile $i', 'icon': Icons.person},
-  );
+
+class CounterScreen extends StatefulWidget {
+  @override
+  _CounterScreenState createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Icon(items[index]['icon']),
-            title: Text(items[index]['title']),
-          );
-        },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'You have increment the buttons inmany times:',
+          ),
+          Text(
+            '$_counter',
+            style: Theme
+                .of(context)
+                .textTheme
+                .headlineMedium,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: _incrementCounter,
+                child: Text('Increment'),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: _decrementCounter,
+                child: Text('Decrement'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
+
+
+// // class ProfileScreen extends StatelessWidget {
+// //   final List<Map<String, dynamic>> items = List.generate(
+// //     10,
+// //         (i) => {'title': 'Profile $i', 'icon': Icons.person},
+// //   );
+// //
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       body: ListView.builder(
+// //         itemCount: items.length,
+// //         itemBuilder: (context, index) {
+// //           return ListTile(
+// //             leading: Icon(items[index]['icon']),
+// //             title: Text(items[index]['title']),
+// //           );
+// //         },
+// //       ),
+// //     );
+// //   }
+// }
